@@ -1,16 +1,180 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11055"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider="target"/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Calculator_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label width="120" alignment="center" text="0" textAlignment="right" id="WHk-go-s6v"/>
+                        <group width="1" alignment="left" id="UbM-YP-3md">
+                            <items>
+                                <button width="32" height="26" alignment="center" title="C" id="zwJ-5v-40z">
+                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="clearButton_click" destination="AgC-eL-Hgc" id="gcG-8H-VMr"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="+/-" id="koG-60-Leq">
+                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="font" type="system" pointSize="11"/>
+                                    <connections>
+                                        <action selector="keyChangeSign_click" destination="AgC-eL-Hgc" id="jxX-5B-nV9"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="%" id="s6w-U9-be9">
+                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="keyPercent_click" destination="AgC-eL-Hgc" id="4e7-MO-ekN"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="/" id="0lZ-H1-xQm">
+                                    <color key="backgroundColor" red="0.93546932935714722" green="0.56877398490905762" blue="0.25002920627593994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="keyDivide_click" destination="AgC-eL-Hgc" id="nsx-rU-QQN"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="center" id="EUB-Gl-2eq">
+                            <items>
+                                <button width="32" height="26" alignment="center" title="7" id="fFf-mU-nKV">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="key7_click" destination="AgC-eL-Hgc" id="G8b-K8-2Tc"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="8" id="LpX-6c-4gf">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="key8_click" destination="AgC-eL-Hgc" id="2vY-Zf-7qq"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="9" id="ZNS-bN-0aS">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="key9_click" destination="AgC-eL-Hgc" id="AAg-Az-qP2"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="*" id="6PV-EA-s1a">
+                                    <color key="backgroundColor" red="0.93546932935714722" green="0.56877398490905762" blue="0.25002920627593994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="keyMultiply_click" destination="AgC-eL-Hgc" id="z60-Cf-AAg"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="center" id="Nnn-l1-DEw">
+                            <items>
+                                <button width="32" height="26" alignment="center" title="4" id="SPm-W3-Odo">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="key4_click" destination="AgC-eL-Hgc" id="Tca-ji-c9o"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="5" id="q4B-24-XzC">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="key5_click" destination="AgC-eL-Hgc" id="bgV-UM-bbp"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="6" id="fVs-mM-zam">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="key6_click" destination="AgC-eL-Hgc" id="flO-qW-2Ub"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="-" id="xNb-GP-nvR">
+                                    <color key="backgroundColor" red="0.93546932935714722" green="0.56877398490905762" blue="0.25002920627593994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="keySubtract_click" destination="AgC-eL-Hgc" id="9oy-vS-zej"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="center" id="JTj-QG-BdZ">
+                            <items>
+                                <button width="32" height="26" alignment="center" title="1" id="zFJ-Gu-AM2">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="key1_click" destination="AgC-eL-Hgc" id="13q-KH-enn"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="2" id="0p5-zR-N0C">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="key2_click" destination="AgC-eL-Hgc" id="ioi-2j-MRp"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="3" id="Swa-7v-LZt">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="key3_click" destination="AgC-eL-Hgc" id="cWM-O5-Q50"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="+" id="4It-uO-TVh">
+                                    <color key="backgroundColor" red="0.93546932935714722" green="0.56877398490905762" blue="0.25002920627593994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="keyAdd_click" destination="AgC-eL-Hgc" id="ydP-Q1-ont"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="center" id="HTq-Kd-7aU">
+                            <items>
+                                <button width="64" height="26" alignment="center" title="0" id="vZO-3O-dKh">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="key0_click" destination="AgC-eL-Hgc" id="wLW-8e-6ja"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="." id="0CN-mF-QeT">
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="keyDecimal_click" destination="AgC-eL-Hgc" id="L9B-dw-f7T"/>
+                                    </connections>
+                                </button>
+                                <button width="32" height="26" alignment="center" title="=" id="TiW-Ia-IWN">
+                                    <color key="backgroundColor" red="0.93546932935714722" green="0.56877398490905762" blue="0.25002920627593994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="keyEquals_click" destination="AgC-eL-Hgc" id="IoE-68-Zbg"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="clearButton" destination="zwJ-5v-40z" id="TcB-3s-SgI"/>
+                        <outlet property="displayLabel" destination="WHk-go-s6v" id="ZCT-AM-2zL"/>
+                        <outlet property="key1" destination="zFJ-Gu-AM2" id="KRT-py-Ob3"/>
+                        <outlet property="key2" destination="0p5-zR-N0C" id="gX6-G4-RQb"/>
+                        <outlet property="key3" destination="Swa-7v-LZt" id="SPB-8A-lLZ"/>
+                        <outlet property="key4" destination="SPm-W3-Odo" id="i93-Pw-U3L"/>
+                        <outlet property="key5" destination="q4B-24-XzC" id="Hdm-Fn-75m"/>
+                        <outlet property="key6" destination="fVs-mM-zam" id="SUJ-AS-DQt"/>
+                        <outlet property="key7" destination="fFf-mU-nKV" id="i38-9I-EI5"/>
+                        <outlet property="key8" destination="LpX-6c-4gf" id="GgL-JY-ECT"/>
+                        <outlet property="key9" destination="ZNS-bN-0aS" id="4X3-7l-eJJ"/>
+                        <outlet property="keyAdd" destination="4It-uO-TVh" id="LSK-GI-ssR"/>
+                        <outlet property="keyChangeSign" destination="koG-60-Leq" id="ZPn-ZS-M1j"/>
+                        <outlet property="keyDecimal" destination="0CN-mF-QeT" id="D9N-Fi-9BY"/>
+                        <outlet property="keyDivide" destination="0lZ-H1-xQm" id="gam-T0-B8X"/>
+                        <outlet property="keyEquals" destination="TiW-Ia-IWN" id="AfF-Im-YtA"/>
+                        <outlet property="keyMultiply" destination="6PV-EA-s1a" id="LuW-Qy-gnu"/>
+                        <outlet property="keyPercent" destination="s6w-U9-be9" id="M9A-9s-HdR"/>
+                        <outlet property="keySubtract" destination="xNb-GP-nvR" id="Ott-Xl-dNI"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="220" y="344"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -31,7 +195,7 @@
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModuleProvider="target"/>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Calculator_WatchKit_App" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="468" y="643"/>
         </scene>

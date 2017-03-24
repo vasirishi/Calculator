@@ -573,6 +573,7 @@
 				0A57C6811E0C70B800D5E774 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A57C6831E0C70B800D5E774 /* Build configuration list for PBXNativeTarget "Calculator WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -581,6 +582,7 @@
 				0A57C6851E0C70B800D5E774 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A57C6871E0C70B800D5E774 /* Build configuration list for PBXNativeTarget "Calculator" */ = {
 			isa = XCConfigurationList;
@@ -589,6 +591,7 @@
 				0A57C6891E0C70B800D5E774 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
