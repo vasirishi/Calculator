@@ -34,6 +34,7 @@ class InterfaceController: WKInterfaceController {
         super.awake(withContext: context)
 
         // Configure interface objects here.
+        clearButton_click()
     }
     
     override func willActivate() {
