@@ -9,7 +9,6 @@
 import WatchKit
 import Foundation
 
-
 // Basic math functions
 func add(_ a: Double, b: Double) -> Double {
     return a + b
@@ -51,7 +50,7 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var clearButton: WKInterfaceButton!
 
     @IBAction func clearButton_click() {
-        userInput = ""
+        userInput = "0"
         accumulator = 0
         updateDisplay()
         numberStack.removeAll()
@@ -139,38 +138,22 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var keyPercent: WKInterfaceButton!
 
     var accumulator: Double = 0.0 // Store the calculated value here
-    var userInput = "" // User-entered digits
+    var userInput = "0" // User-entered digits
 
     var numberStack: [Double] = [] // Number stack
     var operatorStack: [String] = [] // Operator stack
 
-    // original version of handleInput function
-//    func handleInput(_ str: String) {
-//        if str == "-" {
-//            if userInput.hasPrefix(str) {
-//                // Strip off the first character (a dash)
-//                userInput = userInput.substring(from: userInput.characters.index(after: userInput.startIndex))
-//            } else {
-//                userInput = str + userInput
-//            }
-//        } else {
-//            userInput += str
-//        }
-//        accumulator = Double((userInput as NSString).doubleValue)
-//        updateDisplay()
-//    }
-
-    func handleInput(_ str: String) {
-        if str == "-" {
-            if userInput.hasPrefix(str) {
+    func handleInput(_ string: String) {
+        if string == "-" {
+            if userInput.hasPrefix(string) {
                 // Strip off the first character (a dash)
-                userInput = userInput.substring(from: userInput.characters.index(after: userInput.startIndex))
+                userInput = userInput.substring(from: userInput.index(after: userInput.startIndex))
             }
             else {
-                userInput = str + userInput
+                userInput = string + userInput
             }
         }
-        else if str == "%" {
+        else if string == "%" {
             if userInput.isEmpty {
                 // do cool stuff with current display
                 userInput = displayLabelText
@@ -187,7 +170,7 @@ class InterfaceController: WKInterfaceController {
             }
         }
         else {
-            userInput += str
+            userInput += string
         }
         accumulator = Double(userInput)!
         updateDisplay()
@@ -195,29 +178,29 @@ class InterfaceController: WKInterfaceController {
 
     func updateDisplay() {
         // If the value is an integer, don't show a decimal point
-        let iAcc = Int(accumulator)
-        if accumulator - Double(iAcc) == 0 {
-            displayLabelText = "\(iAcc)"
-            displayLabel.setText(displayLabelText)
+        let accumulatorInteger = Int(accumulator)
+        if accumulator - Double(accumulatorInteger) == 0 {
+            displayLabelText = "\(accumulatorInteger)"
         }
         else {
             displayLabelText = "\(accumulator)"
-            displayLabel.setText(displayLabelText)
         }
+
+        displayLabel.setText(displayLabelText)
     }
 
-    func doMath(_ newOp: String) {
+    func doMath(_ newOperator: String) {
         if !userInput.isEmpty && !numberStack.isEmpty {
-            let stackOp = operatorStack.last
-            if !((stackOp == "+" || stackOp == "-") && (newOp == "*" || newOp == "/")) {
-                let oper = operators[operatorStack.removeLast()]
-                accumulator = oper!(numberStack.removeLast(), accumulator)
+            let stackOperator = operatorStack.last
+            if !((stackOperator == "+" || stackOperator == "-") && (newOperator == "*" || newOperator == "/")) {
+                let lastOperator = operators[operatorStack.removeLast()]
+                accumulator = lastOperator!(numberStack.removeLast(), accumulator)
                 doEquals()
             }
         }
-        operatorStack.append(newOp)
+        operatorStack.append(newOperator)
         numberStack.append(accumulator)
-        userInput = ""
+        userInput = "0"
         updateDisplay()
     }
 
@@ -226,13 +209,13 @@ class InterfaceController: WKInterfaceController {
             return
         }
         if !numberStack.isEmpty {
-            let oper = operators[operatorStack.removeLast()]
-            accumulator = oper!(numberStack.removeLast(), accumulator)
+            let lastOperator = operators[operatorStack.removeLast()]
+            accumulator = lastOperator!(numberStack.removeLast(), accumulator)
             if !operatorStack.isEmpty {
                 doEquals()
             }
         }
         updateDisplay()
-        userInput = ""
+        userInput = "0"
     }
 }
