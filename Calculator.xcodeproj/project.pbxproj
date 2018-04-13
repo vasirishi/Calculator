@@ -21,6 +21,7 @@
 		0A57C6771E0C70B800D5E774 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57C6761E0C70B800D5E774 /* NotificationController.swift */; };
 		0A57C6791E0C70B800D5E774 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57C6781E0C70B800D5E774 /* ComplicationController.swift */; };
 		0A57C67B1E0C70B800D5E774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A57C67A1E0C70B800D5E774 /* Assets.xcassets */; };
+		0ACE75102080F7F600CA5F4C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACE750E2080F66A00CA5F4C /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		0A57C6781E0C70B800D5E774 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		0A57C67A1E0C70B800D5E774 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A57C67C1E0C70B800D5E774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ACE750E2080F66A00CA5F4C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		0A57C66F1E0C70B800D5E774 /* Calculator WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0ACE750E2080F66A00CA5F4C /* Extensions.swift */,
 				0A57C6721E0C70B800D5E774 /* InterfaceController.swift */,
 				0A57C6741E0C70B800D5E774 /* ExtensionDelegate.swift */,
 				0A57C6761E0C70B800D5E774 /* NotificationController.swift */,
@@ -320,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ACE75102080F7F600CA5F4C /* Extensions.swift in Sources */,
 				0A57C6771E0C70B800D5E774 /* NotificationController.swift in Sources */,
 				0A57C6791E0C70B800D5E774 /* ComplicationController.swift in Sources */,
 				0A57C6751E0C70B800D5E774 /* ExtensionDelegate.swift in Sources */,

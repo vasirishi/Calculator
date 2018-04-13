@@ -49,6 +49,10 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var displayLabel: WKInterfaceLabel!
     @IBOutlet var clearButton: WKInterfaceButton!
 
+    @IBAction func button_click() {
+        WKInterfaceDevice.current().play(.click)
+    }
+
     @IBAction func clearButton_click() {
         userInput = "0"
         accumulator = 0
@@ -178,12 +182,18 @@ class InterfaceController: WKInterfaceController {
 
     func updateDisplay() {
         // If the value is an integer, don't show a decimal point
-        let accumulatorInteger = Int(accumulator)
+        let accumulatorInteger = Int64(accumulator)
         if accumulator - Double(accumulatorInteger) == 0 {
             displayLabelText = "\(accumulatorInteger)"
+            if displayLabelText.count > 13 {
+                displayLabelText = "\(accumulatorInteger.scientificFormatted)"
+            }
         }
         else {
             displayLabelText = "\(accumulator)"
+            if displayLabelText.count > 13 {
+                displayLabelText = "\(accumulator.scientificFormatted)"
+            }
         }
 
         displayLabel.setText(displayLabelText)
