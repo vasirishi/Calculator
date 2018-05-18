@@ -64,7 +64,7 @@ func handleInput(_ string: String, displayLabelText: String) {
     case "-":
         if userInput.hasPrefix(string) {
             // Strip off the first character (a dash)
-            userInput = userInput.substring(from: userInput.index(after: userInput.startIndex))
+            userInput = String(userInput[userInput.index(after: userInput.startIndex)...userInput.endIndex])
         }
         else {
             userInput = string + userInput
