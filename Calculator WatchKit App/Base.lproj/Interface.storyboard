@@ -18,10 +18,17 @@
                         <group width="1" alignment="left" id="UbM-YP-3md">
                             <items>
                                 <button width="32" height="26" alignment="center" title="C" id="zwJ-5v-40z">
+                                    <gestureRecognizers>
+                                        <longPressGestureRecognizer id="IBc-ld-edO">
+                                            <connections>
+                                                <action selector="clearButton_longPress:" destination="AgC-eL-Hgc" id="7Cc-af-G3Y"/>
+                                            </connections>
+                                        </longPressGestureRecognizer>
+                                    </gestureRecognizers>
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.83129924535751343" green="0.83141952753067017" blue="0.83127301931381226" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="Xt9-2d-1dA"/>
+                                        <action selector="clearButton_click" destination="AgC-eL-Hgc" id="3XZ-gU-brA"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="+/-" id="koG-60-Leq">
@@ -29,20 +36,20 @@
                                     <color key="backgroundColor" red="0.83129924535751343" green="0.83141952753067017" blue="0.83127301931381226" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="font" type="system" pointSize="11"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="aEX-6o-wI0"/>
+                                        <action selector="keyChangeSign_click" destination="AgC-eL-Hgc" id="66n-sD-Pfe"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="%" id="s6w-U9-be9">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.83129924535751343" green="0.83141952753067017" blue="0.83127301931381226" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="ZhC-sK-22Q"/>
+                                        <action selector="keyPercent_click" destination="AgC-eL-Hgc" id="zGl-Fd-Wwm"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="/" id="0lZ-H1-xQm">
                                     <color key="backgroundColor" red="0.93546932935714722" green="0.56877398490905762" blue="0.25002920627593994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="N8E-tG-mT5"/>
+                                        <action selector="keyDivide_click" destination="AgC-eL-Hgc" id="0pa-bX-bc4"/>
                                     </connections>
                                 </button>
                             </items>
@@ -53,14 +60,14 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="prK-yj-rSb"/>
+                                        <action selector="key7_click" destination="AgC-eL-Hgc" id="iIu-Xh-T1n"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="8" id="LpX-6c-4gf">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="hdB-Bg-5tP"/>
+                                        <action selector="key8_click" destination="AgC-eL-Hgc" id="qxf-0d-Wfx"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="9" id="ZNS-bN-0aS">
@@ -68,13 +75,13 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="ng0-Lr-ewr"/>
+                                        <action selector="key9_click" destination="AgC-eL-Hgc" id="0aj-I7-ee2"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="*" id="6PV-EA-s1a">
                                     <color key="backgroundColor" red="0.93546932935714722" green="0.56877398490905762" blue="0.25002920627593994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="zvi-zi-cXI"/>
+                                        <action selector="keyMultiply_click" destination="AgC-eL-Hgc" id="TYn-U0-LcX"/>
                                     </connections>
                                 </button>
                             </items>
@@ -85,27 +92,27 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="V99-8O-vEf"/>
+                                        <action selector="key4_click" destination="AgC-eL-Hgc" id="Oih-dj-nwA"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="5" id="q4B-24-XzC">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="U8K-uK-asa"/>
+                                        <action selector="key5_click" destination="AgC-eL-Hgc" id="DJS-S7-qOk"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="6" id="fVs-mM-zam">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="sI4-Ng-6Q4"/>
+                                        <action selector="key6_click" destination="AgC-eL-Hgc" id="GhC-lT-M8H"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="-" id="xNb-GP-nvR">
                                     <color key="backgroundColor" red="0.93546932935714722" green="0.56877398490905762" blue="0.25002920627593994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="bXF-jt-e5L"/>
+                                        <action selector="keySubtract_click" destination="AgC-eL-Hgc" id="Ojq-WU-YOV"/>
                                     </connections>
                                 </button>
                             </items>
@@ -116,27 +123,27 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="obd-1A-avp"/>
+                                        <action selector="key1_click" destination="AgC-eL-Hgc" id="7Jt-No-oaq"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="2" id="0p5-zR-N0C">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="e1F-l7-5qH"/>
+                                        <action selector="key2_click" destination="AgC-eL-Hgc" id="9Xu-hf-NXe"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="3" id="Swa-7v-LZt">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="Eu3-SZ-xaR"/>
+                                        <action selector="key3_click" destination="AgC-eL-Hgc" id="JKv-Zl-xAO"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="+" id="4It-uO-TVh">
                                     <color key="backgroundColor" red="0.93546932935714722" green="0.56877398490905762" blue="0.25002920627593994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="xDe-IC-mxs"/>
+                                        <action selector="keyAdd_click" destination="AgC-eL-Hgc" id="XGh-Si-xxq"/>
                                     </connections>
                                 </button>
                             </items>
@@ -147,20 +154,20 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="rJh-Ng-lba"/>
+                                        <action selector="key0_click" destination="AgC-eL-Hgc" id="4iq-eZ-Re4"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="." id="0CN-mF-QeT">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="JGB-tf-Fqf"/>
+                                        <action selector="keyDecimal_click" destination="AgC-eL-Hgc" id="2Lt-vV-ROL"/>
                                     </connections>
                                 </button>
                                 <button width="32" height="26" alignment="center" title="=" id="TiW-Ia-IWN">
                                     <color key="backgroundColor" red="0.93546932935714722" green="0.56877398490905762" blue="0.25002920627593994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
-                                        <action selector="button_click" destination="AgC-eL-Hgc" id="j5a-OH-L6w"/>
+                                        <action selector="keyEquals_click" destination="AgC-eL-Hgc" id="0zc-dE-TUg"/>
                                     </connections>
                                 </button>
                             </items>

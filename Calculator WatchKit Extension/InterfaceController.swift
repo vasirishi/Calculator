@@ -41,6 +41,15 @@ class InterfaceController: WKInterfaceController {
         super.willActivate()
     }
     
+    @IBAction func clearButton_longPress(_ sender: Any) {
+        WKInterfaceDevice.current().play(.retry)
+        
+        userInput = "0"
+        accumulator = 0
+        updateDisplay()
+        numberStack.removeAll()
+        operatorStack.removeAll()
+    }
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
@@ -49,74 +58,89 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var displayLabel: WKInterfaceLabel!
     @IBOutlet var clearButton: WKInterfaceButton!
 
-    @IBAction func button_click() {
+    func buttonClick() {
         WKInterfaceDevice.current().play(.click)
     }
 
     @IBAction func clearButton_click() {
-        userInput = "0"
-        accumulator = 0
-        updateDisplay()
-        numberStack.removeAll()
-        operatorStack.removeAll()
+        buttonClick()
+        handleInput("")
     }
     @IBAction func key9_click() {
+        buttonClick()
         handleInput("9")
     }
     @IBAction func key8_click() {
+        buttonClick()
         handleInput("8")
     }
     @IBAction func key7_click() {
+        buttonClick()
         handleInput("7")
     }
     @IBAction func key6_click() {
+        buttonClick()
         handleInput("6")
     }
     @IBAction func key5_click() {
+        buttonClick()
         handleInput("5")
     }
     @IBAction func key4_click() {
+        buttonClick()
         handleInput("4")
     }
     @IBAction func key3_click() {
+        buttonClick()
         handleInput("3")
     }
     @IBAction func key2_click() {
+        buttonClick()
         handleInput("2")
     }
     @IBAction func key1_click() {
+        buttonClick()
         handleInput("1")
     }
     @IBAction func key0_click() {
+        buttonClick()
         handleInput("0")
     }
     @IBAction func keyDivide_click() {
+        buttonClick()
         doMath("/")
     }
     @IBAction func keyMultiply_click() {
+        buttonClick()
         doMath("*")
     }
     @IBAction func keySubtract_click() {
+        buttonClick()
         doMath("-")
     }
     @IBAction func keyAdd_click() {
+        buttonClick()
         doMath("+")
     }
     @IBAction func keyEquals_click() {
+        buttonClick()
         doEquals()
     }
     @IBAction func keyDecimal_click() {
+        buttonClick()
         if !userInput.contains("."){
             handleInput(".")
         }
     }
     @IBAction func keyChangeSign_click() {
+        buttonClick()
         if userInput.isEmpty {
             userInput = displayLabelText
         }
         handleInput("-")
     }
     @IBAction func keyPercent_click() {
+        buttonClick()
         if userInput.isEmpty {
             userInput = displayLabelText
         }
@@ -148,7 +172,35 @@ class InterfaceController: WKInterfaceController {
     var operatorStack: [String] = [] // Operator stack
 
     func handleInput(_ string: String) {
-        if string == "-" {
+        switch string {
+        case "":
+            if !userInput.isEmpty {
+                userInput.removeLast()
+            }
+
+            if userInput.isEmpty {
+                userInput = "0"
+            }
+
+            break
+        case "%":
+            if userInput.isEmpty {
+                // do cool stuff with current display
+                userInput = displayLabelText
+            }
+
+            if !userInput.isEmpty {
+                if Double(userInput) == 0.0 {
+                    userInput = "0"
+                }
+                else {
+                    let number = numberStack.count != 0 ? numberStack.last : 1.0
+                    userInput = String(multiply(divide(Double(userInput)!, b: 100), b: number!))
+                }
+            }
+
+            break
+        case "-":
             if userInput.hasPrefix(string) {
                 // Strip off the first character (a dash)
                 userInput = userInput.substring(from: userInput.index(after: userInput.startIndex))
@@ -156,26 +208,14 @@ class InterfaceController: WKInterfaceController {
             else {
                 userInput = string + userInput
             }
-        }
-        else if string == "%" {
-            if userInput.isEmpty {
-                // do cool stuff with current display
-                userInput = displayLabelText
-            }
-            
-            if !userInput.isEmpty {
-                if Double(userInput) == 0.0 {
-                    userInput = ""
-                }
-                else {
-                    let number = numberStack.count != 0 ? numberStack.last : 1.0
-                    userInput = String(multiply(divide(Double(userInput)!, b: 100), b: number!))
-                }
-            }
-        }
-        else {
+
+            break
+        default:
             userInput += string
+
+            break
         }
+
         accumulator = Double(userInput)!
         updateDisplay()
     }
