@@ -21,6 +21,8 @@
 		0A57C6771E0C70B800D5E774 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57C6761E0C70B800D5E774 /* NotificationController.swift */; };
 		0A57C6791E0C70B800D5E774 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57C6781E0C70B800D5E774 /* ComplicationController.swift */; };
 		0A57C67B1E0C70B800D5E774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A57C67A1E0C70B800D5E774 /* Assets.xcassets */; };
+		0A7DDBC420AF3A87003B55E1 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7DDBC320AF3A87003B55E1 /* Calculator.swift */; };
+		0A7DDBC520AF3A87003B55E1 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7DDBC320AF3A87003B55E1 /* Calculator.swift */; };
 		0ACE75102080F7F600CA5F4C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACE750E2080F66A00CA5F4C /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +88,7 @@
 		0A57C6781E0C70B800D5E774 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		0A57C67A1E0C70B800D5E774 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A57C67C1E0C70B800D5E774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A7DDBC320AF3A87003B55E1 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		0ACE750E2080F66A00CA5F4C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +113,7 @@
 		0A57C6411E0C70B700D5E774 = {
 			isa = PBXGroup;
 			children = (
+				0A7DDBC620AF3AA0003B55E1 /* Shared */,
 				0A57C64C1E0C70B700D5E774 /* Calculator */,
 				0A57C6601E0C70B800D5E774 /* Calculator WatchKit App */,
 				0A57C66F1E0C70B800D5E774 /* Calculator WatchKit Extension */,
@@ -171,6 +175,14 @@
 				0A57C6711E0C70B800D5E774 /* PushNotificationPayload.apns */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0A7DDBC620AF3AA0003B55E1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				0A7DDBC320AF3A87003B55E1 /* Calculator.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +328,7 @@
 			files = (
 				0A57C6501E0C70B800D5E774 /* ViewController.swift in Sources */,
 				0A57C64E1E0C70B700D5E774 /* AppDelegate.swift in Sources */,
+				0A7DDBC420AF3A87003B55E1 /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +341,7 @@
 				0A57C6791E0C70B800D5E774 /* ComplicationController.swift in Sources */,
 				0A57C6751E0C70B800D5E774 /* ExtensionDelegate.swift in Sources */,
 				0A57C6731E0C70B800D5E774 /* InterfaceController.swift in Sources */,
+				0A7DDBC520AF3A87003B55E1 /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
