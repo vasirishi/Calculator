@@ -60,57 +60,57 @@ class InterfaceController: WKInterfaceController {
     }
     @IBAction func clearButton_click() {
         buttonClick()
-        handleInput("", displayLabelText: displayLabelText)
+        accumulator = handleInput("", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func key9_click() {
         buttonClick()
-        handleInput("9", displayLabelText: displayLabelText)
+        accumulator = handleInput("9", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func key8_click() {
         buttonClick()
-        handleInput("8", displayLabelText: displayLabelText)
+        accumulator = handleInput("8", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func key7_click() {
         buttonClick()
-        handleInput("7", displayLabelText: displayLabelText)
+        accumulator = handleInput("7", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func key6_click() {
         buttonClick()
-        handleInput("6", displayLabelText: displayLabelText)
+        accumulator = handleInput("6", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func key5_click() {
         buttonClick()
-        handleInput("5", displayLabelText: displayLabelText)
+        accumulator = handleInput("5", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func key4_click() {
         buttonClick()
-        handleInput("4", displayLabelText: displayLabelText)
+        accumulator = handleInput("4", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func key3_click() {
         buttonClick()
-        handleInput("3", displayLabelText: displayLabelText)
+        accumulator = handleInput("3", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func key2_click() {
         buttonClick()
-        handleInput("2", displayLabelText: displayLabelText)
+        accumulator = handleInput("2", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func key1_click() {
         buttonClick()
-        handleInput("1", displayLabelText: displayLabelText)
+        accumulator = handleInput("1", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func key0_click() {
         buttonClick()
-        handleInput("0", displayLabelText: displayLabelText)
+        accumulator = handleInput("0", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func keyDivide_click() {
@@ -141,7 +141,7 @@ class InterfaceController: WKInterfaceController {
     @IBAction func keyDecimal_click() {
         buttonClick()
         if !userInput.contains("."){
-            handleInput(".", displayLabelText: displayLabelText)
+            accumulator = handleInput(".", displayLabelText: displayLabelText)
             updateDisplay()
         }
     }
@@ -150,7 +150,7 @@ class InterfaceController: WKInterfaceController {
         if userInput.isEmpty {
             userInput = displayLabelText
         }
-        handleInput("-", displayLabelText: displayLabelText)
+        accumulator = handleInput("-", displayLabelText: displayLabelText)
         updateDisplay()
     }
     @IBAction func keyPercent_click() {
@@ -158,7 +158,7 @@ class InterfaceController: WKInterfaceController {
         if userInput.isEmpty {
             userInput = displayLabelText
         }
-        handleInput("%", displayLabelText: displayLabelText)
+        accumulator = handleInput("%", displayLabelText: displayLabelText)
         updateDisplay()
     }
 
@@ -167,14 +167,17 @@ class InterfaceController: WKInterfaceController {
     }
 
     func updateDisplay() {
-        guard abs(accumulator) <= Double.greatestFiniteMagnitude else {
+//        guard accumulator != nil else { return }
+        guard accumulator != nil && abs(accumulator!) <= Double.greatestFiniteMagnitude else {
             clearButton_longPress("")
-            displayLabel.setText("ERROR")
+            displayLabelText = "ERROR"
+            displayLabel.setText(displayLabelText)
             return
         }
+
         // If the value is an integer, don't show a decimal point
-        let accumulatorInteger = Int64(accumulator)
-        if accumulator - Double(accumulatorInteger) == 0 {
+        let accumulatorInteger = Int64(accumulator!)
+        if accumulator! - Double(accumulatorInteger) == 0 {
             displayLabelText = "\(accumulatorInteger)"
             if displayLabelText.count > 11 {
                 displayLabelText = "\(accumulatorInteger.scientificFormatted)"
