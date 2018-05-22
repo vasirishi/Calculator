@@ -176,13 +176,13 @@ class InterfaceController: WKInterfaceController {
         let accumulatorInteger = Int64(accumulator)
         if accumulator - Double(accumulatorInteger) == 0 {
             displayLabelText = "\(accumulatorInteger)"
-            if displayLabelText.count > 13 {
+            if displayLabelText.count > 11 {
                 displayLabelText = "\(accumulatorInteger.scientificFormatted)"
             }
         }
         else {
             displayLabelText = "\(accumulator)"
-            if displayLabelText.count > 13 {
+            if displayLabelText.count > 11 {
                 displayLabelText = "\(accumulator.scientificFormatted)"
             }
         }
