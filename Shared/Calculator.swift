@@ -26,15 +26,15 @@ typealias Binop = (Double, Double) -> Double
 let operators: [String: Binop] = [ "+" : add, "-" : subtract, "*" : multiply, "/" : divide ]
 
 var displayLabelText = ""
-var accumulator: Double = 0.0 // Store the calculated value here
+var accumulator: Double? = 0.0 // Store the calculated value here
 var userInput = "0" // User-entered digits
 
 var numberStack: [Double] = [] // Number stack
 var operatorStack: [String] = [] // Operator stack
 
-func handleInput(_ string: String, displayLabelText: String) {
+func handleInput(_ string: String, displayLabelText: String) -> Double? {
     switch string {
-    case "":
+    case "": // clear last digit
         if !userInput.isEmpty {
             userInput.removeLast()
         }
@@ -61,7 +61,7 @@ func handleInput(_ string: String, displayLabelText: String) {
         }
 
         break
-    case "-":
+    case "-": // change sign
         if userInput.hasPrefix(string) {
             // Strip off the first character (a dash)
             userInput = String(userInput[userInput.index(after: userInput.startIndex)...userInput.endIndex])
@@ -77,7 +77,8 @@ func handleInput(_ string: String, displayLabelText: String) {
         break
     }
 
-    accumulator = Double(userInput)!
+//    accumulator =  Double(userInput) != nil ? Double(userInput)! : 0
+    return Double(userInput)
 }
 
 func doMath(_ newOperator: String) {
@@ -85,12 +86,12 @@ func doMath(_ newOperator: String) {
         let stackOperator = operatorStack.last
         if !((stackOperator == "+" || stackOperator == "-") && (newOperator == "*" || newOperator == "/")) {
             let lastOperator = operators[operatorStack.removeLast()]
-            accumulator = lastOperator!(numberStack.removeLast(), accumulator)
+            accumulator = lastOperator!(numberStack.removeLast(), accumulator!)
             doEquals()
         }
     }
     operatorStack.append(newOperator)
-    numberStack.append(accumulator)
+    numberStack.append(accumulator!)
     userInput = "0"
 }
 
@@ -100,7 +101,7 @@ func doEquals() {
     }
     if !numberStack.isEmpty {
         let lastOperator = operators[operatorStack.removeLast()]
-        accumulator = lastOperator!(numberStack.removeLast(), accumulator)
+        accumulator = lastOperator!(numberStack.removeLast(), accumulator!)
         if !operatorStack.isEmpty {
             doEquals()
         }
