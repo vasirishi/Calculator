@@ -185,7 +185,7 @@ class InterfaceController: WKInterfaceController {
         }
         else {
             displayLabelText = "\(accumulator!)"
-            if displayLabelText.count > 13 {
+            if displayLabelText.count > 11 {
                 displayLabelText = "\(accumulator!.scientificFormatted)"
             }
         }
