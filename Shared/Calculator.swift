@@ -75,8 +75,7 @@ public class Calculator: NSObject {
     }
 
     public func clear() {
-        userInput = handleInput(input: "", userInput: userInput)
-        accumulator = Double(userInput)
+        keyPress("")
     }
 
     public func clearAll() {
@@ -86,11 +85,23 @@ public class Calculator: NSObject {
         operatorStack.removeAll()
     }
 
+    public func changeSign() {
+        keyPress("-")
+    }
+
+    public func doPercentage() {
+        keyPress("%")
+    }
+
+    public func addDecimal() {
+        keyPress(".")
+    }
+
     public func keyPress(_ key: String) {
         let myString = !userInput.isEmpty ? userInput : "0"
 
         guard key != "." || (key == "." && !myString.contains(key)) else { return }
-        guard ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "%", "."].contains(key) else { return }
+        guard ["", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "%", "."].contains(key) else { return }
 
         userInput = handleInput(input: key, userInput: myString)
         accumulator = Double(userInput)
@@ -106,7 +117,7 @@ public class Calculator: NSObject {
         case "-": // change sign
             if myString.hasPrefix(input) {
                 // Strip off the first character (a dash)
-                myString = String(myString[myString.index(after: myString.startIndex)...myString.endIndex])
+                myString = String(myString[myString.index(after: myString.startIndex)..<myString.endIndex])
             }
             else {
                 myString = myString == "0" ? myString : input + myString
@@ -122,6 +133,8 @@ public class Calculator: NSObject {
             }
             break
         default: // append the keystroke to the current entry string
+//            myString = myString == "0" ? "" : myString
+            if myString == "0" { myString = "" }
             myString += input
             break
         }

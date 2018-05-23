@@ -146,6 +146,47 @@ class CalculatorTests: XCTestCase {
         assert(displayText == "2")
     }
 
+    func testDivideByZero() {
+        var displayText = ""
+
+        calc.keyPress("8")
+        displayText = calc.displayText
+        assert(displayText == "8")
+
+        calc.doMath("/")
+        displayText = calc.displayText
+        assert(displayText == "8")
+
+        calc.keyPress("0")
+        displayText = calc.displayText
+        assert(displayText == "0")
+
+        calc.doMath("/")
+        displayText = calc.displayText
+        assert(displayText == "ERROR")
+
+        calc.keyPress("8")
+        displayText = calc.displayText
+        assert(displayText == "8")
+
+        calc.doMath("/")
+        displayText = calc.displayText
+        assert(displayText == "8")
+
+        calc.keyPress("0")
+        displayText = calc.displayText
+        assert(displayText == "0")
+
+        calc.doEquals()
+        displayText = calc.displayText
+        assert(displayText == "ERROR")
+
+        calc.clear()
+        displayText = calc.displayText
+        assert(displayText == "0")
+
+    }
+
     func testEntry() {
         var displayText = ""
 
@@ -153,7 +194,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "8")
 
-        calc.keyPress(".")
+        calc.addDecimal()
         displayText = calc.displayText
         assert(displayText == "8")
 
@@ -169,13 +210,89 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "8.8")
 
-        calc.keyPress("-")
+        calc.changeSign()//calc.keyPress("-")
         displayText = calc.displayText
         assert(displayText == "-8.8")
+
+        calc.clear()
+        displayText = calc.displayText
+        assert(displayText == "-8")
+
+        calc.addDecimal()
+        displayText = calc.displayText
+        assert(displayText == "-8")
+
+        calc.keyPress("8")
+        displayText = calc.displayText
+        assert(displayText == "-8.8")
+
+        calc.addDecimal()
+        displayText = calc.displayText
+        assert(displayText == "-8.8")
+
+        calc.keyPress("8")
+        displayText = calc.displayText
+        assert(displayText == "-8.88")
+
+        calc.changeSign()//calc.keyPress("-")
+        displayText = calc.displayText
+        assert(displayText == "8.88")
+
+        calc.clear()
+        displayText = calc.displayText
+        assert(displayText == "8.8")
+
+        calc.changeSign()//calc.keyPress("-")
+        displayText = calc.displayText
+        assert(displayText == "-8.8")
+
+        calc.changeSign()//calc.keyPress("-")
+        displayText = calc.displayText
+        assert(displayText == "8.8")
+
+        calc.changeSign()//calc.keyPress("-")
+        displayText = calc.displayText
+        assert(displayText == "-8.8")
+
+        calc.changeSign()//calc.keyPress("-")
+        displayText = calc.displayText
+        assert(displayText == "8.8")
 
         calc.clearAll()
         displayText = calc.displayText
         assert(displayText == "0")
 
+    }
+
+    func testPercentage() {
+        var displayText = ""
+
+        calc.keyPress("2")
+        displayText = calc.displayText
+        assert(displayText == "2")
+
+        calc.doMath("+")
+        displayText = calc.displayText
+        assert(displayText == "2")
+
+        calc.keyPress("2")
+        displayText = calc.displayText
+        assert(displayText == "2")
+
+        calc.doPercentage()
+        displayText = calc.displayText
+        assert(displayText == "0.02")
+
+        calc.doMath("+")
+        displayText = calc.displayText
+        assert(displayText == "0.02")
+
+        calc.keyPress("2")
+        displayText = calc.displayText
+        assert(displayText == "2")
+
+        calc.doEquals()
+        displayText = calc.displayText
+        assert(displayText == "2.02")
     }
 }
