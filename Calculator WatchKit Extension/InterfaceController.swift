@@ -11,6 +11,7 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
     //    var displayLabelText = ""
+    let calculator = Calculator.instance
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -52,113 +53,82 @@ class InterfaceController: WKInterfaceController {
     @IBAction func clearButton_longPress(_ sender: Any) {
         WKInterfaceDevice.current().play(.retry)
 
-        userInput = "0"
-        accumulator = 0
+        calculator.clearAll()
         updateDisplay()
-        numberStack.removeAll()
-        operatorStack.removeAll()
     }
     @IBAction func clearButton_click() {
         buttonClick()
-        accumulator = handleInput("", displayLabelText: displayLabelText)
+        calculator.clear()
         updateDisplay()
     }
     @IBAction func key9_click() {
-        buttonClick()
-        accumulator = handleInput("9", displayLabelText: displayLabelText)
-        updateDisplay()
+        keyPress("9")
     }
     @IBAction func key8_click() {
-        buttonClick()
-        accumulator = handleInput("8", displayLabelText: displayLabelText)
-        updateDisplay()
+        keyPress("8")
     }
     @IBAction func key7_click() {
-        buttonClick()
-        accumulator = handleInput("7", displayLabelText: displayLabelText)
-        updateDisplay()
+        keyPress("7")
     }
     @IBAction func key6_click() {
-        buttonClick()
-        accumulator = handleInput("6", displayLabelText: displayLabelText)
-        updateDisplay()
+        keyPress("6")
     }
     @IBAction func key5_click() {
-        buttonClick()
-        accumulator = handleInput("5", displayLabelText: displayLabelText)
-        updateDisplay()
+        keyPress("5")
     }
     @IBAction func key4_click() {
-        buttonClick()
-        accumulator = handleInput("4", displayLabelText: displayLabelText)
-        updateDisplay()
+        keyPress("4")
     }
     @IBAction func key3_click() {
-        buttonClick()
-        accumulator = handleInput("3", displayLabelText: displayLabelText)
-        updateDisplay()
+        keyPress("3")
     }
     @IBAction func key2_click() {
-        buttonClick()
-        accumulator = handleInput("2", displayLabelText: displayLabelText)
-        updateDisplay()
+        keyPress("2")
     }
     @IBAction func key1_click() {
-        buttonClick()
-        accumulator = handleInput("1", displayLabelText: displayLabelText)
-        updateDisplay()
+        keyPress("1")
     }
     @IBAction func key0_click() {
-        buttonClick()
-        accumulator = handleInput("0", displayLabelText: displayLabelText)
-        updateDisplay()
+        keyPress("0")
+    }
+    @IBAction func keyDecimal_click() {
+        keyPress(".")
+    }
+    @IBAction func keyChangeSign_click() {
+        keyPress("-")
+    }
+    @IBAction func keyPercent_click() {
+        keyPress("%")
     }
     @IBAction func keyDivide_click() {
         buttonClick()
-        doMath("/")
+        calculator.doMath("/")
         updateDisplay()
     }
     @IBAction func keyMultiply_click() {
         buttonClick()
-        doMath("*")
+        calculator.doMath("*")
         updateDisplay()
     }
     @IBAction func keySubtract_click() {
         buttonClick()
-        doMath("-")
+        calculator.doMath("-")
         updateDisplay()
     }
     @IBAction func keyAdd_click() {
         buttonClick()
-        doMath("+")
+        calculator.doMath("+")
         updateDisplay()
     }
     @IBAction func keyEquals_click() {
         buttonClick()
-        doEquals()
+        calculator.doEquals()
         updateDisplay()
     }
-    @IBAction func keyDecimal_click() {
+
+    func keyPress(_ key: String) {
         buttonClick()
-        if !userInput.contains("."){
-            accumulator = handleInput(".", displayLabelText: displayLabelText)
-            updateDisplay()
-        }
-    }
-    @IBAction func keyChangeSign_click() {
-        buttonClick()
-        if userInput.isEmpty {
-            userInput = displayLabelText
-        }
-        accumulator = handleInput("-", displayLabelText: displayLabelText)
-        updateDisplay()
-    }
-    @IBAction func keyPercent_click() {
-        buttonClick()
-        if userInput.isEmpty {
-            userInput = displayLabelText
-        }
-        accumulator = handleInput("%", displayLabelText: displayLabelText)
+        calculator.keyPress(key)
         updateDisplay()
     }
 
@@ -167,131 +137,7 @@ class InterfaceController: WKInterfaceController {
     }
 
     func updateDisplay() {
-//        guard accumulator != nil else { return }
-        guard accumulator != nil && abs(accumulator!) <= Double.greatestFiniteMagnitude else {
-            clearButton_longPress("")
-            displayLabelText = "ERROR"
-            displayLabel.setText(displayLabelText)
-            return
-        }
-
-        // If the value is an integer, don't show a decimal point
-        let accumulatorInteger = Int64(accumulator!)
-        if accumulator! - Double(accumulatorInteger) == 0 {
-            displayLabelText = "\(accumulatorInteger)"
-            if displayLabelText.count > 11 {
-                displayLabelText = "\(accumulatorInteger.scientificFormatted)"
-            }
-        }
-        else {
-            displayLabelText = "\(accumulator!)"
-            if displayLabelText.count > 11 {
-                displayLabelText = "\(accumulator!.scientificFormatted)"
-            }
-        }
-
-        displayLabel.setText(displayLabelText)
+        displayLabel.setText(calculator.displayText)
     }
 
-    //// Basic math functions
-    //func add(_ a: Double, b: Double) -> Double {
-    //    return a + b
-    //}
-    //func subtract(_ a: Double, b: Double) -> Double {
-    //    return a - b
-    //}
-    //func multiply(_ a: Double, b: Double) -> Double {
-    //    return a * b
-    //}
-    //func divide(_ a: Double, b: Double) -> Double {
-    //    return a / b
-    //}
-    //
-    //typealias Binop = (Double, Double) -> Double
-    //let operators: [String: Binop] = [ "+" : add, "-" : subtract, "*" : multiply, "/" : divide ]
-    //
-    //    var accumulator: Double = 0.0 // Store the calculated value here
-    //    var userInput = "0" // User-entered digits
-    //
-    //    var numberStack: [Double] = [] // Number stack
-    //    var operatorStack: [String] = [] // Operator stack
-
-    //    func handleInput(_ string: String) {
-    //        switch string {
-    //        case "":
-    //            if !userInput.isEmpty {
-    //                userInput.removeLast()
-    //            }
-    //
-    //            if userInput.isEmpty {
-    //                userInput = "0"
-    //            }
-    //
-    //            break
-    //        case "%":
-    //            if userInput.isEmpty {
-    //                // do cool stuff with current display
-    //                userInput = displayLabelText
-    //            }
-    //
-    //            if !userInput.isEmpty {
-    //                if Double(userInput) == 0.0 {
-    //                    userInput = "0"
-    //                }
-    //                else {
-    //                    let number = numberStack.count != 0 ? numberStack.last : 1.0
-    //                    userInput = String(multiply(divide(Double(userInput)!, b: 100), b: number!))
-    //                }
-    //            }
-    //
-    //            break
-    //        case "-":
-    //            if userInput.hasPrefix(string) {
-    //                // Strip off the first character (a dash)
-    //                userInput = userInput.substring(from: userInput.index(after: userInput.startIndex))
-    //            }
-    //            else {
-    //                userInput = string + userInput
-    //            }
-    //
-    //            break
-    //        default:
-    //            userInput += string
-    //
-    //            break
-    //        }
-    //
-    //        accumulator = Double(userInput)!
-    //        updateDisplay()
-    //    }
-    //
-    //    func doMath(_ newOperator: String) {
-    //        if !userInput.isEmpty && !numberStack.isEmpty {
-    //            let stackOperator = operatorStack.last
-    //            if !((stackOperator == "+" || stackOperator == "-") && (newOperator == "*" || newOperator == "/")) {
-    //                let lastOperator = operators[operatorStack.removeLast()]
-    //                accumulator = lastOperator!(numberStack.removeLast(), accumulator)
-    //                doEquals()
-    //            }
-    //        }
-    //        operatorStack.append(newOperator)
-    //        numberStack.append(accumulator)
-    //        userInput = "0"
-    //        updateDisplay()
-    //    }
-    //
-    //    func doEquals() {
-    //        if userInput.isEmpty {
-    //            return
-    //        }
-    //        if !numberStack.isEmpty {
-    //            let lastOperator = operators[operatorStack.removeLast()]
-    //            accumulator = lastOperator!(numberStack.removeLast(), accumulator)
-    //            if !operatorStack.isEmpty {
-    //                doEquals()
-    //            }
-    //        }
-    //        updateDisplay()
-    //        userInput = "0"
-    //    }
 }
