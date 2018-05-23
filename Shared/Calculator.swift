@@ -35,15 +35,13 @@ public class Calculator: NSObject {
     public private(set) var accumulator: Double? = 0.0 // Store the calculated value here
     private var userInput = "0" // User-entered digits
 
-    private var numberStack: [Double] = [] // Number stack
-    private var operatorStack: [String] = [] // Operator stack
+    private var numberStack: [Double] = []
+    private var operatorStack: [String] = [] 
 
     public var displayText: String {
         get {
             var myString = "ERROR"
-//             accumulator = Double(userInput)
 
-            //        guard accumulator != nil else { return }
             guard accumulator != nil && abs(accumulator!) <= Double.greatestFiniteMagnitude else {
                 clearAll()
 
@@ -70,7 +68,7 @@ public class Calculator: NSObject {
                 }
             }
 
-            return myString // displayLabelText
+            return myString
         }
     }
 
