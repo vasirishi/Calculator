@@ -10,14 +10,12 @@ import WatchKit
 import Foundation
 
 class InterfaceController: WKInterfaceController {
-    //    var displayLabelText = ""
     let calculator = Calculator.instance
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 
         // Configure interface objects here.
-        clearButton_longPress("")
     }
     
     override func willActivate() {
@@ -92,32 +90,38 @@ class InterfaceController: WKInterfaceController {
         keyPress("0")
     }
     @IBAction func keyDecimal_click() {
-        keyPress(".")
+        buttonClick()
+        calculator.addDecimal()
+        updateDisplay()
     }
     @IBAction func keyChangeSign_click() {
-        keyPress("-")
+        buttonClick()
+        calculator.changeSign()
+        updateDisplay()
     }
     @IBAction func keyPercent_click() {
-        keyPress("%")
+        buttonClick()
+        calculator.doPercentage()
+        updateDisplay()
     }
     @IBAction func keyDivide_click() {
         buttonClick()
-        calculator.doMath("/")
+        calculator.divide()
         updateDisplay()
     }
     @IBAction func keyMultiply_click() {
         buttonClick()
-        calculator.doMath("*")
+        calculator.multiply()
         updateDisplay()
     }
     @IBAction func keySubtract_click() {
         buttonClick()
-        calculator.doMath("-")
+        calculator.subtract()
         updateDisplay()
     }
     @IBAction func keyAdd_click() {
         buttonClick()
-        calculator.doMath("+")
+        calculator.add()
         updateDisplay()
     }
     @IBAction func keyEquals_click() {

@@ -9,16 +9,16 @@
 import Foundation
 
 // Basic math functions
-private func add(_ a: Double, b: Double) -> Double {
+private func doAdd(_ a: Double, b: Double) -> Double {
     return a + b
 }
-private func subtract(_ a: Double, b: Double) -> Double {
+private func doSubtract(_ a: Double, b: Double) -> Double {
     return a - b
 }
-private func multiply(_ a: Double, b: Double) -> Double {
+private func doMultiply(_ a: Double, b: Double) -> Double {
     return a * b
 }
-private func divide(_ a: Double, b: Double) -> Double {
+private func doDivide(_ a: Double, b: Double) -> Double {
     return a / b
 }
 
@@ -30,7 +30,7 @@ public class Calculator: NSObject {
     }
 
     typealias Binop = (Double, Double) -> Double
-    private let operators: [String: Binop] = [ "+" : add, "-" : subtract, "*" : multiply, "/" : divide ]
+    private let operators: [String: Binop] = [ "+" : doAdd, "-" : doSubtract, "*" : doMultiply, "/" : doDivide ]
 
     public private(set) var accumulator: Double? = 0.0 // Store the calculated value here
     private var userInput = "0" // User-entered digits
@@ -97,6 +97,22 @@ public class Calculator: NSObject {
         keyPress(".")
     }
 
+    public func add() {
+        doMath("+")
+    }
+
+    public func subtract() {
+        doMath("-")
+    }
+
+    public func multiply() {
+        doMath("*")
+    }
+
+    public func divide() {
+        doMath("/")
+    }
+
     public func keyPress(_ key: String) {
         let myString = !userInput.isEmpty ? userInput : "0"
 
@@ -129,12 +145,12 @@ public class Calculator: NSObject {
             }
             else {
                 let number: Double? = numberStack.count > 0 ? numberStack.last : 1.0
-                myString = String(multiply(divide(Double(myString)!, b: 100), b: number!))
+                myString = String(doMultiply(doDivide(Double(myString)!, b: 100), b: number!))
             }
             break
         default: // append the keystroke to the current entry string
 //            myString = myString == "0" ? "" : myString
-            if myString == "0" { myString = "" }
+//            if myString == "0" { myString = "" }
             myString += input
             break
         }
@@ -142,7 +158,7 @@ public class Calculator: NSObject {
         return !myString.isEmpty ? myString : "0"
     }
 
-    public func doMath(_ newOperator: String) {
+    private func doMath(_ newOperator: String) {
         if !userInput.isEmpty && !numberStack.isEmpty {
             let stackOperator = operatorStack.last
             if !((stackOperator == "+" || stackOperator == "-") && (newOperator == "*" || newOperator == "/")) {
