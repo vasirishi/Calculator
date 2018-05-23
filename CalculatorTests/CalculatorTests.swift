@@ -281,11 +281,11 @@ class CalculatorTests: XCTestCase {
 
         calc.doPercentage()
         displayText = calc.displayText
-        assert(displayText == "0.02")
+        assert(displayText == "0.04")
 
         calc.doMath("+")
         displayText = calc.displayText
-        assert(displayText == "0.02")
+        assert(displayText == "2.04")
 
         calc.keyPress("2")
         displayText = calc.displayText
@@ -293,6 +293,6 @@ class CalculatorTests: XCTestCase {
 
         calc.doEquals()
         displayText = calc.displayText
-        assert(displayText == "2.02")
+        assert(displayText == "4.04")
     }
 }
