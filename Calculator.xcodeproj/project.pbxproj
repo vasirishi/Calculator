@@ -104,6 +104,7 @@
 		0A7DDC0220B5074A003B55E1 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		0A7DDC0420B5074B003B55E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0ACE750E2080F66A00CA5F4C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0AF15ACF20B857E500AF5EFF /* OriginalAppCode */ = {isa = PBXFileReference; lastKnownFileType = text; path = OriginalAppCode; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +205,7 @@
 			children = (
 				0ACE750E2080F66A00CA5F4C /* Extensions.swift */,
 				0A7DDBC320AF3A87003B55E1 /* Calculator.swift */,
+				0AF15ACF20B857E500AF5EFF /* OriginalAppCode */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

@@ -119,6 +119,10 @@ public class Calculator: NSObject {
 
         userInput = handleInput(input: key, userInput: myString)
         accumulator = Double(userInput)
+        if accumulator == nil {
+            userInput = "0"
+            accumulator = Double(userInput)
+        }
     }
 
     private func handleInput(input: String, userInput: String) -> String {
@@ -129,12 +133,14 @@ public class Calculator: NSObject {
             myString.removeLast()
             break
         case "-": // change sign
+            if myString == "0" { myString = displayText }
             if myString.hasPrefix(input) {
                 // Strip off the first character (a dash)
                 myString = String(myString[myString.index(after: myString.startIndex)..<myString.endIndex])
             }
             else {
-                myString = myString == "0" ? myString : input + myString
+                myString = input + myString
+//                myString = myString == "0" ? myString : input + myString
             }
             break
         case "%": // convert last number entered to percentage
