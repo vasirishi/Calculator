@@ -47,9 +47,8 @@ private func doDivide(_ a: Double, b: Double) -> Double {
 }
 
 public class Calculator: NSObject {
+    // Make this a singleton class
     public static let instance = Calculator()
-    public var maxDisplayLength = 11
-
     private override init() {
         super.init()
     }
@@ -57,11 +56,16 @@ public class Calculator: NSObject {
     typealias BinaryOperator = (Double, Double) -> Double
     private let operators: [Operators: BinaryOperator] = [ .add: doAdd, .subtract: doSubtract, .multiply: doMultiply, .divide: doDivide]
 
-    private var accumulator: Double? = 0.0 // Store the calculated value here
-    private var userInput = "0" // User-entered digits
+    // Mark - Private Global Properties
 
+    private var userInput = "0" // User-entered digits
+    private var accumulator: Double? = 0.0 // Store the calculated value here
     private var numberStack: [Double] = []
     private var operatorStack: [Operators] = []
+
+    // Mark - Public Properties
+
+    public var maxDisplayLength = 11
 
     public var displayText: String {
         get {
@@ -108,6 +112,8 @@ public class Calculator: NSObject {
         }
     }
 
+    // Mark - Public Methods
+
     public func clear() {
         keyPress(.clear)
     }
@@ -123,12 +129,12 @@ public class Calculator: NSObject {
         keyPress(.negative)
     }
 
-    public func doPercentage() {
-        keyPress(.percent)
-    }
-
     public func addDecimal() {
         keyPress(.decimal)
+    }
+
+    public func doPercentage() {
+        keyPress(.percent)
     }
 
     public func add() {
@@ -160,6 +166,8 @@ public class Calculator: NSObject {
         }
     }
 
+    // Mark - Private Methods
+
     private func handleInput(input: Keys, userInput: String) -> String {
         var myString = !userInput.isEmpty ? userInput : "0"
 
@@ -170,15 +178,17 @@ public class Calculator: NSObject {
         case .negative: // change sign
             if myString == "0" { myString = displayText }
             if myString.hasPrefix(input.rawValue) {
-                // Strip off the first character (a dash)
+                // Remove the existing negative sign
                 myString = String(myString[myString.index(after: myString.startIndex)..<myString.endIndex])
             }
             else {
                 myString = input.rawValue + myString
-//                myString = myString == "0" ? myString : input + myString
             }
             break
         case .percent: // convert last number entered to percentage
+            // If the current userInput is just a number, convert it to a percentage; otherwise, multiply that percentage with the previous value
+            // if adding or multiplying, do as is
+            // if multiplying or dividing, get current number as a percentage of itself, then perform math against previous number
             if Double(myString) == 0.0 {
                 myString = "0"
             }
@@ -188,8 +198,6 @@ public class Calculator: NSObject {
             }
             break
         default: // append the keystroke to the current entry string
-//            myString = myString == "0" ? "" : myString
-//            if myString == "0" { myString = "" }
             myString += input.rawValue
             break
         }
