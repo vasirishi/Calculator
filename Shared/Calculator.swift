@@ -24,6 +24,7 @@ private func doDivide(_ a: Double, b: Double) -> Double {
 
 public class Calculator: NSObject {
     public static let instance = Calculator()
+    public var maxDisplayLength = 11
 
     private override init() {
         super.init()
@@ -56,13 +57,13 @@ public class Calculator: NSObject {
                 let accumulatorInteger = Int64(accumulator!)
                 if accumulator! - Double(accumulatorInteger) == 0 {
                     myString = "\(accumulatorInteger)"
-                    if myString.count > 11 {
+                    if myString.count > maxDisplayLength {
                         myString = "\(accumulatorInteger.scientificFormatted)"
                     }
                 }
                 else {
                     myString = "\(accumulator!)"
-                    if myString.count > 11 {
+                    if myString.count > maxDisplayLength {
                         myString = "\(accumulator!.scientificFormatted)"
                     }
                 }
