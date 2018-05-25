@@ -8,6 +8,30 @@
 
 import Foundation
 
+public enum Keys: String {
+    case clear = ""
+    case zero = "0"
+    case one = "1"
+    case two = "2"
+    case three = "3"
+    case four = "4"
+    case five = "5"
+    case six = "6"
+    case seven = "7"
+    case eight = "8"
+    case nine = "9"
+    case decimal = "."
+    case negative = "-"
+    case percent = "%"
+}
+
+private enum Operators: String {
+    case add = "+"
+    case subtract = "-"
+    case multiply = "*"
+    case divide = "/"
+}
+
 // Basic math functions
 private func doAdd(_ a: Double, b: Double) -> Double {
     return a + b
@@ -31,13 +55,13 @@ public class Calculator: NSObject {
     }
 
     typealias BinaryOperator = (Double, Double) -> Double
-    private let operators: [String: BinaryOperator] = [ "+" : doAdd, "-" : doSubtract, "*" : doMultiply, "/" : doDivide ]
+    private let operators: [Operators: BinaryOperator] = [ .add: doAdd, .subtract: doSubtract, .multiply: doMultiply, .divide: doDivide]
 
     private var accumulator: Double? = 0.0 // Store the calculated value here
     private var userInput = "0" // User-entered digits
 
     private var numberStack: [Double] = []
-    private var operatorStack: [String] = [] 
+    private var operatorStack: [Operators] = []
 
     public var displayText: String {
         get {
@@ -85,7 +109,7 @@ public class Calculator: NSObject {
     }
 
     public func clear() {
-        keyPress("")
+        keyPress(.clear)
     }
 
     public func clearAll() {
@@ -96,38 +120,37 @@ public class Calculator: NSObject {
     }
 
     public func changeSign() {
-        keyPress("-")
+        keyPress(.negative)
     }
 
     public func doPercentage() {
-        keyPress("%")
+        keyPress(.percent)
     }
 
     public func addDecimal() {
-        keyPress(".")
+        keyPress(.decimal)
     }
 
     public func add() {
-        doMath("+")
+        doMath(.add)
     }
 
     public func subtract() {
-        doMath("-")
+        doMath(.subtract)
     }
 
     public func multiply() {
-        doMath("*")
+        doMath(.multiply)
     }
 
     public func divide() {
-        doMath("/")
+        doMath(.divide)
     }
 
-    public func keyPress(_ key: String) {
+    public func keyPress(_ key: Keys) {
         let myString = !userInput.isEmpty ? userInput : "0"
 
-        guard key != "." || (key == "." && !myString.contains(key)) else { return }
-        guard ["", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "%", "."].contains(key) else { return }
+        guard key != .decimal || (key == .decimal && !myString.contains(key.rawValue)) else { return }
 
         userInput = handleInput(input: key, userInput: myString)
         accumulator = Double(userInput)
@@ -137,25 +160,25 @@ public class Calculator: NSObject {
         }
     }
 
-    private func handleInput(input: String, userInput: String) -> String {
+    private func handleInput(input: Keys, userInput: String) -> String {
         var myString = !userInput.isEmpty ? userInput : "0"
 
         switch input {
-        case "": // clear last digit
+        case .clear: // clear last digit
             myString.removeLast()
             break
-        case "-": // change sign
+        case .negative: // change sign
             if myString == "0" { myString = displayText }
-            if myString.hasPrefix(input) {
+            if myString.hasPrefix(input.rawValue) {
                 // Strip off the first character (a dash)
                 myString = String(myString[myString.index(after: myString.startIndex)..<myString.endIndex])
             }
             else {
-                myString = input + myString
+                myString = input.rawValue + myString
 //                myString = myString == "0" ? myString : input + myString
             }
             break
-        case "%": // convert last number entered to percentage
+        case .percent: // convert last number entered to percentage
             if Double(myString) == 0.0 {
                 myString = "0"
             }
@@ -167,17 +190,17 @@ public class Calculator: NSObject {
         default: // append the keystroke to the current entry string
 //            myString = myString == "0" ? "" : myString
 //            if myString == "0" { myString = "" }
-            myString += input
+            myString += input.rawValue
             break
         }
 
         return !myString.isEmpty ? myString : "0"
     }
 
-    private func doMath(_ newOperator: String) {
+    private func doMath(_ newOperator: Operators) {
         if !userInput.isEmpty && !numberStack.isEmpty {
             let stackOperator = operatorStack.last
-            if !((stackOperator == "+" || stackOperator == "-") && (newOperator == "*" || newOperator == "/")) {
+            if !((stackOperator == .add || stackOperator == .subtract) && (newOperator == .multiply || newOperator == .divide)) {
                 let lastOperator = operators[operatorStack.removeLast()]
                 accumulator = lastOperator!(numberStack.removeLast(), accumulator!)
                 doEquals()

@@ -62,34 +62,34 @@ class InterfaceController: WKInterfaceController {
         updateDisplay()
     }
     @IBAction func key9_click() {
-        keyPress("9")
+        keyPress(.nine)
     }
     @IBAction func key8_click() {
-        keyPress("8")
+        keyPress(.eight)
     }
     @IBAction func key7_click() {
-        keyPress("7")
+        keyPress(.seven)
     }
     @IBAction func key6_click() {
-        keyPress("6")
+        keyPress(.six)
     }
     @IBAction func key5_click() {
-        keyPress("5")
+        keyPress(.five)
     }
     @IBAction func key4_click() {
-        keyPress("4")
+        keyPress(.four)
     }
     @IBAction func key3_click() {
-        keyPress("3")
+        keyPress(.three)
     }
     @IBAction func key2_click() {
-        keyPress("2")
+        keyPress(.two)
     }
     @IBAction func key1_click() {
-        keyPress("1")
+        keyPress(.one)
     }
     @IBAction func key0_click() {
-        keyPress("0")
+        keyPress(.zero)
     }
     @IBAction func keyDecimal_click() {
         buttonClick()
@@ -132,7 +132,7 @@ class InterfaceController: WKInterfaceController {
         updateDisplay()
     }
 
-    func keyPress(_ key: String) {
+    func keyPress(_ key: Keys) {
         buttonClick()
         calculator.keyPress(key)
         updateDisplay()
