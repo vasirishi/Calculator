@@ -30,10 +30,10 @@ public class Calculator: NSObject {
         super.init()
     }
 
-    typealias Binop = (Double, Double) -> Double
-    private let operators: [String: Binop] = [ "+" : doAdd, "-" : doSubtract, "*" : doMultiply, "/" : doDivide ]
+    typealias BinaryOperator = (Double, Double) -> Double
+    private let operators: [String: BinaryOperator] = [ "+" : doAdd, "-" : doSubtract, "*" : doMultiply, "/" : doDivide ]
 
-    public private(set) var accumulator: Double? = 0.0 // Store the calculated value here
+    private var accumulator: Double? = 0.0 // Store the calculated value here
     private var userInput = "0" // User-entered digits
 
     private var numberStack: [Double] = []
