@@ -68,6 +68,17 @@ public class Calculator: NSObject {
                 }
             }
 
+            // add negative and/or decimal when zero
+            if myString == "0" {
+                if userInput.contains(".") {
+                    myString += "."
+                }
+
+                if userInput.contains("-") {
+                    myString = "-" + myString
+                }
+            }
+
             return myString
         }
     }
