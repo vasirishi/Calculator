@@ -18,6 +18,12 @@ extension Formatter {
     }()
 }
 
+extension String {
+    var scientificFormatted: String {
+        return Formatter.scientific.string(for: self) ?? ""
+    }
+}
+
 extension Numeric {
     var scientificFormatted: String {
         return Formatter.scientific.string(for: self) ?? ""
