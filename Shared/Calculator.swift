@@ -33,17 +33,20 @@ private enum Operators: String {
 }
 
 // Basic math functions
-private func doAdd(_ a: Double, b: Double) -> Double {
+private func doAdd(a: Double, b: Double) -> Double {
     return a + b
 }
-private func doSubtract(_ a: Double, b: Double) -> Double {
+private func doSubtract(a: Double, b: Double) -> Double {
     return a - b
 }
-private func doMultiply(_ a: Double, b: Double) -> Double {
+private func doMultiply(a: Double, b: Double) -> Double {
     return a * b
 }
-private func doDivide(_ a: Double, b: Double) -> Double {
+private func doDivide(a: Double, b: Double) -> Double {
     return a / b
+}
+private func doPercent(a: Double, b: Double) -> Double {
+    return a / 100 * b
 }
 
 public class Calculator: NSObject {
@@ -60,8 +63,8 @@ public class Calculator: NSObject {
 
     private var userInput = "0" // User-entered digits
     private var accumulator: Double? = 0.0 // Store the calculated value here
-    private var numberStack: [Double] = []
-    private var operatorStack: [Operators] = []
+    private var numberStack: [Double] = [] // Collection of entered numbers between operations
+    private var operatorStack: [Operators] = [] // Collection of operators between entered numbers
 
     // Mark - Public Properties
 
@@ -85,27 +88,24 @@ public class Calculator: NSObject {
                 let accumulatorInteger = Int64(accumulator!)
                 if accumulator! - Double(accumulatorInteger) == 0 {
                     myString = "\(accumulatorInteger)"
-                    if myString.count > maxDisplayLength {
-                        myString = "\(accumulatorInteger.scientificFormatted)"
-                    }
                 }
                 else {
                     myString = "\(accumulator!)"
-                    if myString.count > maxDisplayLength {
-                        myString = "\(accumulator!.scientificFormatted)"
-                    }
                 }
             }
 
             // add negative and/or decimal when zero
-            if myString == "0" {
-                if userInput.contains(".") {
-                    myString += "."
-                }
+            if userInput.contains(".") && !myString.contains(".") {
+                myString += "."
+            }
 
-                if userInput.contains("-") {
-                    myString = "-" + myString
-                }
+            if userInput.contains("-") && !myString.contains("-") {
+                myString = "-" + myString
+            }
+
+            // do we need to shorten the display?
+            if myString.count > maxDisplayLength {
+                myString = "\(myString.scientificFormatted)"
             }
 
             return myString
@@ -135,6 +135,7 @@ public class Calculator: NSObject {
 
     public func doPercentage() {
         keyPress(.percent)
+//        doMath(.percent)
     }
 
     public func add() {
@@ -154,11 +155,9 @@ public class Calculator: NSObject {
     }
 
     public func keyPress(_ key: Keys) {
-        let myString = !userInput.isEmpty ? userInput : "0"
+        guard key != .decimal || (key == .decimal && !userInput.contains(key.rawValue)) else { return }
 
-        guard key != .decimal || (key == .decimal && !myString.contains(key.rawValue)) else { return }
-
-        userInput = handleInput(input: key, userInput: myString)
+        userInput = handleInput(input: key, userInput: userInput)
         accumulator = Double(userInput)
         if accumulator == nil {
             userInput = "0"
@@ -169,67 +168,68 @@ public class Calculator: NSObject {
     // Mark - Private Methods
 
     private func handleInput(input: Keys, userInput: String) -> String {
-        var myString = !userInput.isEmpty ? userInput : "0"
+        var currentInput = !userInput.isEmpty ? userInput : "0"
 
         switch input {
         case .clear: // clear last digit
-            myString.removeLast()
+            currentInput.removeLast()
             break
         case .negative: // change sign
-            if myString == "0" { myString = displayText }
-            if myString.hasPrefix(input.rawValue) {
+            if currentInput == "0" { currentInput = displayText }
+            if currentInput.hasPrefix(input.rawValue) {
                 // Remove the existing negative sign
-                myString = String(myString[myString.index(after: myString.startIndex)..<myString.endIndex])
+                currentInput = String(currentInput[currentInput.index(after: currentInput.startIndex)..<currentInput.endIndex])
             }
             else {
-                myString = input.rawValue + myString
+                currentInput = input.rawValue + currentInput
             }
             break
         case .percent: // convert last number entered to percentage
             // If the current userInput is just a number, convert it to a percentage; otherwise, multiply that percentage with the previous value
-            // if adding or multiplying, do as is
+            // if adding or subtracting, do operation first, then get percentage of result
             // if multiplying or dividing, get current number as a percentage of itself, then perform math against previous number
-            if Double(myString) == 0.0 {
-                myString = "0"
-            }
-            else {
-                let number: Double? = numberStack.count > 0 ? numberStack.last : 1.0
-                myString = String(doMultiply(doDivide(Double(myString)!, b: 100), b: number!))
-            }
+
+            let multiplier = [.multiply, .divide].contains(operatorStack.last) ? 1.0 : numberStack.last ?? 1.0
+            currentInput = String(doPercent(a: Double(currentInput)!, b: multiplier))
             break
         default: // append the keystroke to the current entry string
-            myString += input.rawValue
+            currentInput += input.rawValue
             break
         }
 
-        return !myString.isEmpty ? myString : "0"
+        return !currentInput.isEmpty ? currentInput : "0"
     }
 
     private func doMath(_ newOperator: Operators) {
+        guard accumulator != nil else { return }
+
+        let activeOperators: [Operators] = [.add, .subtract]
+        let passiveOperators: [Operators] = [.multiply, .divide]
+
         if !userInput.isEmpty && !numberStack.isEmpty {
-            let stackOperator = operatorStack.last
-            if !((stackOperator == .add || stackOperator == .subtract) && (newOperator == .multiply || newOperator == .divide)) {
-                let lastOperator = operators[operatorStack.removeLast()]
-                accumulator = lastOperator!(numberStack.removeLast(), accumulator!)
-                doEquals()
+            if let stackOperator = operatorStack.last {
+                if !(activeOperators.contains(stackOperator) && passiveOperators.contains(newOperator)) {
+                    if let operation = operators[operatorStack.removeLast()] {
+                        accumulator = operation(numberStack.removeLast(), accumulator!)
+                        doEquals()
+                    }
+                }
             }
         }
         operatorStack.append(newOperator)
         numberStack.append(accumulator!)
-        userInput = "0"
+        userInput = ""
     }
 
     public func doEquals() {
-        if userInput.isEmpty {
-            return
-        }
-        if !numberStack.isEmpty {
-            let lastOperator = operators[operatorStack.removeLast()]
-            accumulator = lastOperator!(numberStack.removeLast(), accumulator!)
+        if !numberStack.isEmpty && !operatorStack.isEmpty {
+            if let lastOperator = operators[operatorStack.removeLast()] {
+                accumulator = lastOperator(numberStack.removeLast(), accumulator!)
+            }
             if !operatorStack.isEmpty {
                 doEquals()
             }
         }
-        userInput = "0"
+        userInput = ""
     }
 }

@@ -37,7 +37,7 @@ class CalculatorTests: XCTestCase {
     func testAdd() {
         var displayText = ""
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -45,7 +45,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "2")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -53,7 +53,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "4")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -65,7 +65,7 @@ class CalculatorTests: XCTestCase {
     func testMultiply() {
         var displayText = ""
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -73,7 +73,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "2")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -81,7 +81,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "4")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -93,7 +93,7 @@ class CalculatorTests: XCTestCase {
     func testSubtract() {
         var displayText = ""
 
-        calc.keyPress("6")
+        calc.keyPress(.six)
         displayText = calc.displayText
         assert(displayText == "6")
 
@@ -101,7 +101,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "6")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -109,7 +109,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "4")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -121,7 +121,7 @@ class CalculatorTests: XCTestCase {
     func testDivide() {
         var displayText = ""
 
-        calc.keyPress("8")
+        calc.keyPress(.eight)
         displayText = calc.displayText
         assert(displayText == "8")
 
@@ -129,7 +129,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "8")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -137,7 +137,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "4")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -149,7 +149,7 @@ class CalculatorTests: XCTestCase {
     func testDivideByZero() {
         var displayText = ""
 
-        calc.keyPress("8")
+        calc.keyPress(.eight)
         displayText = calc.displayText
         assert(displayText == "8")
 
@@ -157,7 +157,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "8")
 
-        calc.keyPress("0")
+        calc.keyPress(.zero)
         displayText = calc.displayText
         assert(displayText == "0")
 
@@ -165,7 +165,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "ERROR")
 
-        calc.keyPress("8")
+        calc.keyPress(.eight)
         displayText = calc.displayText
         assert(displayText == "8")
 
@@ -173,7 +173,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "8")
 
-        calc.keyPress("0")
+        calc.keyPress(.zero)
         displayText = calc.displayText
         assert(displayText == "0")
 
@@ -190,19 +190,19 @@ class CalculatorTests: XCTestCase {
     func testEntry() {
         var displayText = ""
 
-        calc.keyPress("8")
+        calc.keyPress(.eight)
         displayText = calc.displayText
         assert(displayText == "8")
 
         calc.addDecimal()
         displayText = calc.displayText
-        assert(displayText == "8")
+        assert(displayText == "8.")
 
-        calc.keyPress("8")
+        calc.keyPress(.eight)
         displayText = calc.displayText
         assert(displayText == "8.8")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "8.82")
 
@@ -216,13 +216,13 @@ class CalculatorTests: XCTestCase {
 
         calc.clear()
         displayText = calc.displayText
-        assert(displayText == "-8")
+        assert(displayText == "-8.")
 
         calc.addDecimal()
         displayText = calc.displayText
-        assert(displayText == "-8")
+        assert(displayText == "-8.")
 
-        calc.keyPress("8")
+        calc.keyPress(.eight)
         displayText = calc.displayText
         assert(displayText == "-8.8")
 
@@ -230,7 +230,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "-8.8")
 
-        calc.keyPress("8")
+        calc.keyPress(.eight)
         displayText = calc.displayText
         assert(displayText == "-8.88")
 
@@ -267,7 +267,7 @@ class CalculatorTests: XCTestCase {
     func testPercentage() {
         var displayText = ""
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
@@ -275,47 +275,126 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "2")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
         calc.doPercentage()
         displayText = calc.displayText
         assert(displayText == "0.04")
+//        assert(displayText == "0.02")
 
         calc.add()
         displayText = calc.displayText
         assert(displayText == "2.04")
+//        assert(displayText == "2.02")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
         calc.doEquals()
         displayText = calc.displayText
         assert(displayText == "4.04")
+//        assert(displayText == "4.02")
+    }
+
+    func testPercentage2() {
+        var displayText = ""
+
+        calc.keyPress(.nine)
+        displayText = calc.displayText
+        assert(displayText == "9")
+
+        calc.doPercentage()
+        displayText = calc.displayText
+        assert(displayText == "0.09")
+
+        calc.multiply()
+        displayText = calc.displayText
+        assert(displayText == "0.09")
+
+        calc.keyPress(.three)
+        displayText = calc.displayText
+        assert(displayText == "3")
+
+        calc.doPercentage()
+        displayText = calc.displayText
+        assert(displayText == "0.03")
+
+        calc.doEquals()
+        displayText = calc.displayText
+        assert(displayText == "0.0027")
+    }
+
+    func testPercentage3() {
+        var displayText = ""
+
+        calc.keyPress(.four)
+        displayText = calc.displayText
+        assert(displayText == "4")
+
+        calc.add()
+        displayText = calc.displayText
+        assert(displayText == "4")
+
+        calc.keyPress(.five)
+        displayText = calc.displayText
+        assert(displayText == "5")
+
+        calc.doPercentage()
+        displayText = calc.displayText
+        assert(displayText == "0.2")
+
+        calc.add()
+        displayText = calc.displayText
+        assert(displayText == "4.2")
+
+        calc.keyPress(.two)
+        displayText = calc.displayText
+        assert(displayText == "2")
+
+        calc.doEquals()
+        displayText = calc.displayText
+        assert(displayText == "6.2")
+    }
+
+    func testPercentage4() {
+        var displayText = ""
+
+        calc.keyPress(.six)
+        displayText = calc.displayText
+        assert(displayText == "6")
+
+        calc.doPercentage()
+        displayText = calc.displayText
+        assert(displayText == "0.06")
+
+        calc.doEquals()
+        displayText = calc.displayText
+        assert(displayText == "0.06")
     }
 
     func testDecimalAndMultiply() {
         var displayText = ""
 
-        calc.keyPress("1")
+        calc.keyPress(.one)
         displayText = calc.displayText
         assert(displayText == "1")
 
-        calc.keyPress("6")
+        calc.keyPress(.six)
         displayText = calc.displayText
         assert(displayText == "16")
 
         calc.addDecimal()
         displayText = calc.displayText
-        assert(displayText == "16")
+        assert(displayText == "16.")
 
-        calc.keyPress("6")
+        calc.keyPress(.six)
         displayText = calc.displayText
         assert(displayText == "16.6")
 
-        calc.keyPress("4")
+        calc.keyPress(.four)
         displayText = calc.displayText
         assert(displayText == "16.64")
 
@@ -325,13 +404,13 @@ class CalculatorTests: XCTestCase {
 
         calc.addDecimal()
         displayText = calc.displayText
-        assert(displayText == "0")
+        assert(displayText == "0.")
 
-        calc.keyPress("3")
+        calc.keyPress(.three)
         displayText = calc.displayText
         assert(displayText == "0.3")
 
-        calc.keyPress("6")
+        calc.keyPress(.six)
         displayText = calc.displayText
         assert(displayText == "0.36")
 
@@ -343,23 +422,23 @@ class CalculatorTests: XCTestCase {
     func testDecimalAndMultiply2() {
         var displayText = ""
 
-        calc.keyPress("1")
+        calc.keyPress(.one)
         displayText = calc.displayText
         assert(displayText == "1")
 
-        calc.keyPress("6")
+        calc.keyPress(.six)
         displayText = calc.displayText
         assert(displayText == "16")
 
         calc.addDecimal()
         displayText = calc.displayText
-        assert(displayText == "16")
+        assert(displayText == "16.")
 
-        calc.keyPress("6")
+        calc.keyPress(.six)
         displayText = calc.displayText
         assert(displayText == "16.6")
 
-        calc.keyPress("4")
+        calc.keyPress(.four)
         displayText = calc.displayText
         assert(displayText == "16.64")
 
@@ -369,13 +448,13 @@ class CalculatorTests: XCTestCase {
 
         calc.addDecimal()
         displayText = calc.displayText
-        assert(displayText == "0")
+        assert(displayText == "0.")
 
-        calc.keyPress("3")
+        calc.keyPress(.three)
         displayText = calc.displayText
         assert(displayText == "0.3")
 
-        calc.keyPress("6")
+        calc.keyPress(.six)
         displayText = calc.displayText
         assert(displayText == "0.36")
 
@@ -383,7 +462,7 @@ class CalculatorTests: XCTestCase {
         displayText = calc.displayText
         assert(displayText == "0.36")
 
-        calc.keyPress("2")
+        calc.keyPress(.two)
         displayText = calc.displayText
         assert(displayText == "2")
 
