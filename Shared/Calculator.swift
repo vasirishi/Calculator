@@ -135,7 +135,6 @@ public class Calculator: NSObject {
 
     public func doPercentage() {
         keyPress(.percent)
-//        doMath(.percent)
     }
 
     public func add() {
